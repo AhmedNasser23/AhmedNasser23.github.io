@@ -1,0 +1,590 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Portfolio of Ahmed Hemdan, a Computer Science student specializing in machine learning and back-end development.">
+    <meta name="keywords" content="Ahmed Hemdan, portfolio, computer science, machine learning, back-end development, web development">
+    <meta name="author" content="Ahmed Hemdan">
+    <title>Ahmed Hemdan - Portfolio</title>
+    <link rel="icon" type="image/png" href="https://placehold.co/32x32/1a1a2e/e0e0e0?text=AH">
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&family=Montserrat:wght@600;700;800&display=swap" rel="stylesheet">
+    <script src="https://unpkg.com/lucide@latest"></script>
+    <style>
+        body {
+            font-family: 'Poppins', sans-serif;
+            background: linear-gradient(135deg, #1a1a2e 0%, #16213e 100%);
+            color: #e0e0e0;
+            line-height: 1.7;
+            scroll-padding-top: 120px; /* Increased to ensure section header is visible */
+        }
+        html {
+            scroll-behavior: smooth;
+        }
+        /* Navbar Styles */
+        header {
+            background: #16213e;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.2);
+            position: sticky;
+            top: 0;
+            z-index: 50;
+            min-height: 120px; /* Explicit height for consistency */
+        }
+        .header-content {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            padding: 1.25rem 1.5rem;
+        }
+        .site-title {
+            font-family: 'Montserrat', sans-serif;
+            font-weight: 800;
+            font-size: 3.5rem;
+            color: #ffffff;
+            transition: text-shadow 0.3s ease-in-out, transform 0.3s ease-in-out;
+            text-align: center;
+            margin-bottom: 1rem;
+        }
+        .site-title:hover {
+            text-shadow: 0 0 15px #e94560;
+            transform: scale(1.02);
+        }
+        .nav-link {
+            font-weight: 500;
+            color: #e0e0e0;
+            transition: color 0.3s ease, transform 0.3s ease;
+            position: relative;
+        }
+        .nav-link:hover {
+            color: #e94560;
+        }
+        .nav-link::after {
+            content: '';
+            position: absolute;
+            width: 0;
+            height: 3px;
+            background-color: #e94560;
+            bottom: -8px;
+            left: 50%;
+            transform: translateX(-50%);
+            transition: width 0.3s ease;
+            border-radius: 1.5px;
+        }
+        .nav-link:hover::after {
+            width: 100%;
+        }
+        .section-heading {
+            font-family: 'Montserrat', sans-serif;
+            font-weight: 700;
+            font-size: 2.25rem;
+            margin-bottom: 2rem;
+            color: #e94560;
+            text-align: center;
+            position: relative;
+            padding-bottom: 0.75rem;
+        }
+        .section-heading::after {
+            content: '';
+            display: block;
+            width: 100px;
+            height: 4px;
+            background: linear-gradient(to right, #e94560, #ff6b6b);
+            margin: 0.75rem auto 0;
+            border-radius: 2px;
+        }
+        .card {
+            background: #2c3e50;
+            border-radius: 1.25rem;
+            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.3);
+            padding: 2.5rem;
+            margin-bottom: 2.5rem;
+            opacity: 0;
+            transform: translateY(30px);
+            transition: opacity 0.6s ease-out, transform 0.6s ease-out;
+        }
+        .card.fade-in {
+            opacity: 1;
+            transform: translateY(0);
+        }
+        .project-item {
+            display: flex;
+            flex-direction: column;
+            background: #34495e;
+            border-radius: 1rem;
+            box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
+            margin-bottom: 2rem;
+            overflow: hidden;
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+        .project-item:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 12px 24px rgba(0, 0, 0, 0.3);
+        }
+        @media (min-width: 768px) {
+            .project-item {
+                flex-direction: row;
+            }
+            .project-item.reverse {
+                flex-direction: row-reverse;
+            }
+        }
+        .project-image-container {
+            flex: 1;
+            min-width: 40%;
+            background: #1a1a2e;
+            padding: 1.5rem;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+        .project-content {
+            flex: 1;
+            padding: 2rem;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+        }
+        .skill-category-card {
+            background: #3f556a;
+            border-radius: 0.75rem;
+            padding: 1.5rem;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.15);
+            transition: transform 0.2s ease, box-shadow 0.2s ease;
+        }
+        .skill-category-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 8px 16px rgba(0, 0, 0, 0.25);
+        }
+        .skill-item {
+            display: flex;
+            align-items: center;
+            margin-bottom: 0.75rem;
+        }
+        .skill-item i {
+            margin-right: 0.75rem;
+            color: #e94560;
+        }
+        .icon {
+            display: inline-block;
+            vertical-align: middle;
+            margin-right: 0.75rem;
+        }
+        img {
+            max-width: 100%;
+            height: auto;
+            border-radius: 0.75rem;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+        }
+        .footer-icon-link {
+            transition: transform 0.3s ease, color 0.3s ease;
+        }
+        .footer-icon-link:hover {
+            transform: scale(1.2);
+            color: #e94560;
+        }
+        @keyframes pulse {
+            0% { transform: scale(1); }
+            50% { transform: scale(1.02); }
+            100% { transform: scale(1); }
+        }
+        .animated-heading {
+            animation: pulse 2.5s infinite ease-in-out;
+        }
+        .section-anchor {
+            /* This span needs to be *before* the section heading, or at least its position */
+            display: block;
+            position: relative;
+            /* Adjust this value based on your fixed header's height + desired padding */
+            top: -120px; /* Matches scroll-padding-top */
+            visibility: hidden; /* Keep it hidden */
+            height: 0; /* Important to not take up space */
+        }
+        @media (max-width: 640px) {
+            .header-content {
+                padding: 1rem;
+            }
+            .site-title {
+                font-size: 2.25rem;
+            }
+            .nav-link {
+                font-size: 0.875rem;
+                padding: 0.5rem;
+            }
+            header {
+                min-height: 100px; /* Adjusted for mobile */
+            }
+            body {
+                scroll-padding-top: 100px; /* Adjusted for mobile */
+            }
+            .section-anchor {
+                top: -100px; /* Matches mobile scroll-padding-top */
+            }
+        }
+    </style>
+</head>
+<body class="antialiased">
+    <header class="bg-[#16213e] shadow-xl py-5 sticky top-0 z-50">
+        <nav class="container mx-auto px-6 header-content">
+            <a href="#" class="site-title">Ahmed Hemdan</a>
+            <ul class="flex flex-wrap justify-center space-x-4 md:space-x-8 mt-4">
+                <li><a href="#about" class="nav-link" aria-label="Navigate to About section">About</a></li>
+                <li><a href="#education" class="nav-link" aria-label="Navigate to Education section">Education</a></li>
+                <li><a href="#experience" class="nav-link" aria-label="Navigate to Experience section">Experience</a></li>
+                <li><a href="#certifications" class="nav-link" aria-label="Navigate to Certifications section">Certifications</a></li>
+                <li><a href="#projects" class="nav-link" aria-label="Navigate to Projects section">Projects</a></li>
+                <li><a href="#skills" class="nav-link" aria-label="Navigate to Skills section">Skills</a></li>
+                <li><a href="#contact" class="nav-link" aria-label="Navigate to Contact section">Contact</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <main class="container mx-auto px-4 py-10">
+        <span id="about" class="section-anchor"></span>
+        <section class="card">
+            <h2 class="section-heading animated-heading">About Me</h2>
+            <div class="text-lg text-center mb-6">
+                <p class="mb-4 text-gray-200">
+                    A passionate fourth-year Computer Science student with expertise in machine learning and back-end development. I specialize in building robust, scalable systems and thrive on solving complex problems to create innovative solutions.
+                </p>
+            </div>
+            <div class="flex flex-col md:flex-row justify-center items-center space-y-4 md:space-y-0 md:space-x-10 text-gray-300">
+                <div class="flex items-center">
+                    <i data-lucide="mail" class="icon w-5 h-5 text-[#e94560]"></i>
+                    <a href="mailto:ahmadhemdan280@gmail.com" class="hover:underline text-[#e94560]" aria-label="Email Ahmed Hemdan">ahmadhemdan280@gmail.com</a>
+                </div>
+                <div class="flex items-center">
+                    <i data-lucide="phone" class="icon w-5 h-5 text-[#e94560]"></i>
+                    <span>+20 115 509 8664</span>
+                </div>
+                <div class="flex items-center">
+                    <a href="https://www.linkedin.com/in/ahmed-nasser-91aab6279/" target="_blank" rel="noopener noreferrer" class="flex items-center hover:underline text-[#e94560]" aria-label="Visit Ahmed Nasser's LinkedIn profile">
+                        <svg class="icon w-5 h-5 text-[#e94560]" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor"><path d="M19 0h-14c-2.761 0-5 2.239-5 5v14c0 2.761 2.239 5 5 5h14c2.761 0 5-2.239 5-5v-14c0-2.761-2.239-5-5-5zm-11 19h-3v-11h3v11zm-1.5-12.268c-.966 0-1.75-.79-1.75-1.764s.784-1.764 1.75-1.764 1.75.79 1.75 1.764-.783 1.764-1.75 1.764zm13.5 12.268h-3v-5.604c0-3.368-4-3.113-4 0v5.604h-3v-11h3v1.765c1.396-2.586 7-2.777 7 2.476v6.759z"/></svg>
+                        LinkedIn
+                    </a>
+                </div>
+                <div class="flex items-center">
+                    <a href="https://github.com/AhmedNasser23" target="_blank" rel="noopener noreferrer" class="flex items-center hover:underline text-[#e94560]" aria-label="Visit Ahmed Nasser's GitHub profile">
+                        <svg class="icon w-5 h-5 text-[#e94560]" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor"><path d="M12 0c-6.626 0-12 5.373-12 12 0 5.302 3.438 9.8 8.207 11.387.599.111.793-.261.793-.577v-2.234c-3.338.726-4.033-1.416-4.033-1.416-.546-1.387-1.333-1.756-1.333-1.756-1.08-.731.084-.716.084-.716 1.192.085 1.816 1.29 1.816 1.29 1.052 1.815 2.779 1.299 3.444.993.108-.775.418-1.299.762-1.599-2.651-.299-5.438-1.328-5.438-5.931 0-1.311.469-2.381 1.236-3.221-.124-.3-.535-1.524.117-3.176 0 0 1.008-.322 3.301 1.23.957-.266 1.983-.399 3.003-.404 1.02.005 2.047.138 3.006.404 2.291-1.552 3.297-1.23 3.297-1.23.653 1.653.242 2.876.118 3.176.77.84 1.235 1.911 1.235 3.221 0 4.61-2.791 5.625-5.444 5.923.43.372.823 1.102.823 2.222v3.293c0 .319.192.694.801.576 4.765-1.589 8.196-6.086 8.196-11.386 0-6.627-5.373-12-12-12z"/></svg>
+                        GitHub
+                    </a>
+                </div>
+                <div class="flex items-center">
+                    <i data-lucide="map-pin" class="icon w-5 h-5 text-[#e94560]"></i>
+                    <span>Giza, Egypt</span>
+                </div>
+            </div>
+        </section>
+
+        <span id="education" class="section-anchor"></span>
+        <section class="card">
+            <h2 class="section-heading">Education</h2>
+            <div class="mb-6">
+                <h3 class="text-xl font-semibold text-gray-100">Bachelor of Computer Science</h3>
+                <p class="text-gray-300">Cairo University, Oct 2022 - Present</p>
+                <p class="text-gray-300">GPA: 3.24/4.0 (Very Good)</p>
+                <p class="text-gray-200 mt-3">
+                    Relevant coursework: Algorithms Analysis and Design, Statistics and Probability, Linear Algebra, Calculus, Discrete Mathematics, Software Engineering, Operating Systems, Logic Design.
+                </p>
+            </div>
+        </section>
+
+        <span id="experience" class="section-anchor"></span>
+        <section class="card">
+            <h2 class="section-heading">Professional Experience</h2>
+            <div class="mb-6">
+                <h3 class="text-xl font-semibold text-gray-100">iOS Development Intern</h3>
+                <p class="text-gray-300">Banque Misr, Aug 2024 - Sep 2024</p>
+                <ul class="list-disc list-inside text-gray-200 mt-3 space-y-2">
+                    <li>Mastered Swift, utilizing closures, protocols, and error handling to develop efficient, robust code.</li>
+                    <li>Designed 15+ responsive views using UIKit and AutoLayout, improving user experience by 30%.</li>
+                    <li>Contributed to a secure money transfer application, ensuring seamless functionality.</li>
+                    <li>Integrated RESTful APIs with Alamofire for efficient client-server communication.</li>
+                </ul>
+            </div>
+        </section>
+
+        <span id="certifications" class="section-anchor"></span>
+        <section class="card">
+            <h2 class="section-heading">Certifications</h2>
+            <div class="mb-6">
+                <a href="https://www.coursera.org/account/accomplishments/verify/0HSVFYN84Q3C" class="hover:text-[#e94560] transition-colors" target="_blank" rel="noopener noreferrer"><h3 class="text-xl font-semibold text-gray-100">Supervised Machine Learning: Regression and Classification</h3></a>
+                <p class="text-gray-300">DeepLearning.AI (Coursera)</p>
+                <p class="text-gray-200 mt-3">Mastered linear/logistic regression, gradient descent, and regularization through practical exercises.</p>
+            </div>
+            <div class="mb-6">
+                <a href="https://www.coursera.org/account/accomplishments/verify/986Q6Q4T7O2W" class="hover:text-[#e94560] transition-colors" target="_blank" rel="noopener noreferrer"><h3 class="text-xl font-semibold text-gray-100">Advanced Learning Algorithms</h3></a>
+                <p class="text-gray-300">DeepLearning.AI (Coursera)</p>
+                <p class="text-gray-200 mt-3">Implemented neural networks with TensorFlow and ensemble methods like decision trees.</p>
+            </div>
+        </section>
+
+        <span id="projects" class="section-anchor"></span>
+        <section class="card">
+            <h2 class="section-heading">Projects</h2>
+            <div class="flex flex-col gap-8">
+                <div class="project-item">
+                    <div class="project-image-container">
+                        <img src="https://placehold.co/500x300/1a1a2e/e0e0e0?text=Bazzar+Book+Platform" alt="Bazzar Book E-commerce Platform" class="rounded-lg">
+                    </div>
+                    <div class="project-content">
+                        <div>
+                            <h3 class="text-xl font-semibold text-gray-100 mb-3">Bazzar Book E-commerce Platform</h3>
+                            <p class="text-gray-200 mb-4">
+                                Built a full-featured e-commerce platform for book sales with role-based authentication, dynamic product listings, and Stripe payment integration.
+                            </p>
+                            <p class="text-base text-gray-300 font-medium flex flex-wrap items-center gap-2">
+                                <i data-lucide="code" class="w-5 h-5 text-[#e94560]"></i>
+                                Technologies: C#, ASP.NET Core MVC, Entity Framework Core, SQL Server
+                            </p>
+                            <p class="text-base text-gray-300 font-medium flex flex-wrap items-center gap-2 mt-2">
+                                <i data-lucide="trending-up" class="w-5 h-5 text-[#00b894]"></i>
+                                Impact: Boosted user retention by 40% with a responsive UI.
+                            </p>
+                        </div>
+                        <a href="https://github.com/AhmedNasser23/BazzarBook" target="_blank" rel="noopener noreferrer" class="inline-flex items-center text-[#e94560] hover:underline mt-4 self-start" aria-label="View Bazzar Book project on GitHub">
+                            <i data-lucide="github" class="icon w-5 h-5 mr-2"></i> View on GitHub
+                        </a>
+                    </div>
+                </div>
+
+                <div class="project-item reverse">
+                    <div class="project-image-container">
+                        <img src="https://placehold.co/500x300/1a1a2e/e0e0e0?text=LMS+API+Platform" alt="Learning Management System API Platform" class="rounded-lg">
+                    </div>
+                    <div class="project-content">
+                        <div>
+                            <h3 class="text-xl font-semibold text-gray-100 mb-3">Web-Based LMS API RESTful Platform</h3>
+                            <p class="text-gray-200 mb-4">
+                                Developed a RESTful API for a learning management system, enabling user management, course creation, and student enrollment.
+                            </p>
+                            <p class="text-base text-gray-300 font-medium flex flex-wrap items-center gap-2">
+                                <i data-lucide="code" class="w-5 h-5 text-[#e94560]"></i>
+                                Technologies: Java, Spring Boot, SQLite
+                            </p>
+                            <p class="text-base text-gray-300 font-medium flex flex-wrap items-center gap-2 mt-2">
+                                <i data-lucide="check-circle" class="w-5 h-5 text-[#00b894]"></i>
+                                Quality: Achieved 100% unit test coverage with 30+ tests.
+                            </p>
+                        </div>
+                        <a href="https://github.com/AhmedNasser23/E-Learnig-Management-System" target="_blank" rel="noopener noreferrer" class="inline-flex items-center text-[#e94560] hover:underline mt-4 self-start" aria-label="View LMS API project on GitHub">
+                            <i data-lucide="github" class="icon w-5 h-5 mr-2"></i> View on GitHub
+                        </a>
+                    </div>
+                </div>
+
+                <div class="project-item">
+                    <div class="project-image-container">
+                        <img src="https://placehold.co/500x300/1a1a2e/e0e0e0?text=Number+Converter+Tool" alt="Numbering System Converter Tool" class="rounded-lg">
+                    </div>
+                    <div class="project-content">
+                        <div>
+                            <h3 class="text-xl font-semibold text-gray-100 mb-3">Numbering System Converter Tool</h3>
+                            <p class="text-gray-200 mb-4">
+                                Created an Assembly-based tool for converting numbers across bases with robust input validation.
+                            </p>
+                            <p class="text-base text-gray-300 font-medium flex flex-wrap items-center gap-2">
+                                <i data-lucide="code" class="w-5 h-5 text-[#e94560]"></i>
+                                Technologies: MIPS Assembly, MARS Simulator
+                            </p>
+                            <p class="text-base text-gray-300 font-medium flex flex-wrap items-center gap-2 mt-2">
+                                <i data-lucide="shield-check" class="w-5 h-5 text-[#00b894]"></i>
+                                Reliability: Ensured error-free conversions via input validation.
+                            </p>
+                        </div>
+                        <a href="https://github.com/AhmedNasser23/Numbering-System-Converter" target="_blank" rel="noopener noreferrer" class="inline-flex items-center text-[#e94560] hover:underline mt-4 self-start" aria-label="View Number Converter project on GitHub">
+                            <i data-lucide="github" class="icon w-5 h-5 mr-2"></i> View on GitHub
+                        </a>
+                    </div>
+                </div>
+
+                <div class="project-item reverse">
+                    <div class="project-image-container">
+                        <img src="https://placehold.co/500x300/1a1a2e/e0e0e0?text=Bank+DBMS+System" alt="Bank Database Management System" class="rounded-lg">
+                    </div>
+                    <div class="project-content">
+                        <div>
+                            <h3 class="text-xl font-semibold text-gray-100 mb-3">Bank Database Management System</h3>
+                            <p class="text-gray-200 mb-4">
+                                Engineered a secure DBMS for banking operations, handling account creation, transactions, and data storage.
+                            </p>
+                            <p class="text-base text-gray-300 font-medium flex flex-wrap items-center gap-2">
+                                <i data-lucide="code" class="w-5 h-5 text-[#e94560]"></i>
+                                Technologies: SQL (MySQL/PostgreSQL), Java (Spring Boot)
+                            </p>
+                            <p class="text-base text-gray-300 font-medium flex flex-wrap items-center gap-2 mt-2">
+                                <i data-lucide="lock" class="w-5 h-5 text-[#00b894]"></i>
+                                Security: Prioritized secure data handling and transaction integrity.
+                            </p>
+                        </div>
+                        <a href="https://github.com/AhmedNasser23/Bank-s-Database-Management-System" target="_blank" rel="noopener noreferrer" class="inline-flex items-center text-[#e94560] hover:underline mt-4 self-start" aria-label="View Bank DBMS project on GitHub">
+                            <i data-lucide="github" class="icon w-5 h-5 mr-2"></i> View on GitHub
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <span id="skills" class="section-anchor"></span>
+        <section class="card">
+            <h2 class="section-heading">Technical Skills</h2>
+            <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 text-gray-200">
+                <div class="skill-category-card">
+                    <h3 class="text-lg font-semibold text-gray-100 mb-3 flex items-center">
+                        <i data-lucide="terminal" class="w-5 h-5 mr-2 text-[#e94560]"></i> Programming Languages
+                    </h3>
+                    <ul class="list-none space-y-2">
+                        <li class="skill-item"><i data-lucide="chevron-right" class="w-4 h-4"></i> C</li>
+                        <li class="skill-item"><i data-lucide="chevron-right" class="w-4 h-4"></i> C++</li>
+                        <li class="skill-item"><i data-lucide="chevron-right" class="w-4 h-4"></i> C#</li>
+                        <li class="skill-item"><i data-lucide="chevron-right" class="w-4 h-4"></i> Java</li>
+                        <li class="skill-item"><i data-lucide="chevron-right" class="w-4 h-4"></i> Python</li>
+                        <li class="skill-item"><i data-lucide="chevron-right" class="w-4 h-4"></i> Swift</li>
+                        <li class="skill-item"><i data-lucide="chevron-right" class="w-4 h-4"></i> MIPS Assembly</li>
+                    </ul>
+                </div>
+
+                <div class="skill-category-card">
+                    <h3 class="text-lg font-semibold text-gray-100 mb-3 flex items-center">
+                        <i data-lucide="settings" class="w-5 h-5 mr-2 text-[#e94560]"></i> Development Principles
+                    </h3>
+                    <ul class="list-none space-y-2">
+                        <li class="skill-item"><i data-lucide="chevron-right" class="w-4 h-4"></i> Object-Oriented Programming</li>
+                        <li class="skill-item"><i data-lucide="chevron-right" class="w-4 h-4"></i> SOLID Principles</li>
+                        <li class="skill-item"><i data-lucide="chevron-right" class="w-4 h-4"></i> Design Patterns</li>
+                    </ul>
+                </div>
+
+                <div class="skill-category-card">
+                    <h3 class="text-lg font-semibold text-gray-100 mb-3 flex items-center">
+                        <i data-lucide="package" class="w-5 h-5 mr-2 text-[#e94560]"></i> Frameworks & Libraries
+                    </h3>
+                    <ul class="list-none space-y-2">
+                        <li class="skill-item"><i data-lucide="chevron-right" class="w-4 h-4"></i> ASP.NET MVC</li>
+                        <li class="skill-item"><i data-lucide="chevron-right" class="w-4 h-4"></i> Spring Boot</li>
+                        <li class="skill-item"><i data-lucide="chevron-right" class="w-4 h-4"></i> Entity Framework Core</li>
+                        <li class="skill-item"><i data-lucide="chevron-right" class="w-4 h-4"></i> LINQ</li>
+                        <li class="skill-item"><i data-lucide="chevron-right" class="w-4 h-4"></i> NumPy</li>
+                        <li class="skill-item"><i data-lucide="chevron-right" class="w-4 h-4"></i> Pandas</li>
+                    </ul>
+                </div>
+
+                <div class="skill-category-card">
+                    <h3 class="text-lg font-semibold text-gray-100 mb-3 flex items-center">
+                        <i data-lucide="database" class="w-5 h-5 mr-2 text-[#e94560]"></i> Databases
+                    </h3>
+                    <ul class="list-none space-y-2">
+                        <li class="skill-item"><i data-lucide="chevron-right" class="w-4 h-4"></i> SQL Server</li>
+                        <li class="skill-item"><i data-lucide="chevron-right" class="w-4 h-4"></i> MySQL</li>
+                        <li class="skill-item"><i data-lucide="chevron-right" class="w-4 h-4"></i> PostgreSQL</li>
+                        <li class="skill-item"><i data-lucide="chevron-right" class="w-4 h-4"></i> Relational Database Concepts</li>
+                        <li class="skill-item"><i data-lucide="chevron-right" class="w-4 h-4"></i> Entity Relationship Modeling</li>
+                    </ul>
+                </div>
+
+                <div class="skill-category-card">
+                    <h3 class="text-lg font-semibold text-gray-100 mb-3 flex items-center">
+                        <i data-lucide="globe" class="w-5 h-5 mr-2 text-[#e94560]"></i> Web Development
+                    </h3>
+                    <ul class="list-none space-y-2">
+                        <li class="skill-item"><i data-lucide="chevron-right" class="w-4 h-4"></i> HTML</li>
+                        <li class="skill-item"><i data-lucide="chevron-right" class="w-4 h-4"></i> CSS</li>
+                        <li class="skill-item"><i data-lucide="chevron-right" class="w-4 h-4"></i> JavaScript</li>
+                    </ul>
+                </div>
+
+                <div class="skill-category-card">
+                    <h3 class="text-lg font-semibold text-gray-100 mb-3 flex items-center">
+                        <i data-lucide="cpu" class="w-5 h-5 mr-2 text-[#e94560]"></i> OS & Version Control
+                    </h3>
+                    <ul class="list-none space-y-2">
+                        <li class="skill-item"><i data-lucide="chevron-right" class="w-4 h-4"></i> Linux</li>
+                        <li class="skill-item"><i data-lucide="chevron-right" class="w-4 h-4"></i> Windows</li>
+                        <li class="skill-item"><i data-lucide="chevron-right" class="w-4 h-4"></i> Git</li>
+                    </ul>
+                </div>
+            </div>
+        </section>
+
+        <span id="contact" class="section-anchor"></span>
+        <section class="card">
+            <h2 class="section-heading">Soft Skills & Languages</h2>
+            <div class="grid grid-cols-1 sm:grid-cols-2 gap-8 text-gray-200">
+                <div>
+                    <h3 class="text-lg font-semibold text-gray-100 mb-3 flex items-center">
+                        <i data-lucide="users" class="w-5 h-5 mr-2 text-[#e94560]"></i> Soft Skills
+                    </h3>
+                    <ul class="list-none space-y-2">
+                        <li class="skill-item"><i data-lucide="check-circle" class="w-4 h-4"></i> Problem Solving</li>
+                        <li class="skill-item"><i data-lucide="check-circle" class="w-4 h-4"></i> Communication</li>
+                        <li class="skill-item"><i data-lucide="check-circle" class="w-4 h-4"></i> Time Management</li>
+                        <li class="skill-item"><i data-lucide="check-circle" class="w-4 h-4"></i> Teamwork</li>
+                        <li class="skill-item"><i data-lucide="check-circle" class="w-4 h-4"></i> Public Speaking</li>
+                        <li class="skill-item"><i data-lucide="check-circle" class="w-4 h-4"></i> Leadership</li>
+                    </ul>
+                </div>
+                <div>
+                    <h3 class="text-lg font-semibold text-gray-100 mb-3 flex items-center">
+                        <i data-lucide="languages" class="w-5 h-5 mr-2 text-[#e94560]"></i> Languages
+                    </h3>
+                    <ul class="list-none space-y-2">
+                        <li class="skill-item"><i data-lucide="check-circle" class="w-4 h-4"></i> Arabic (Native)</li>
+                        <li class="skill-item"><i data-lucide="check-circle" class="w-4 h-4"></i> English (Fluent)</li>
+                    </ul>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <footer class="bg-[#0d1117] text-gray-300 py-6 text-center">
+        <div class="container mx-auto px-4">
+            <p>&copy; <span id="current-year"></span> Ahmed Hemdan. All rights reserved.</p>
+            <div class="flex justify-center space-x-6 mt-2">
+                <a href="https://www.linkedin.com/in/ahmed-nasser-91aab6279/" target="_blank" rel="noopener noreferrer" class="footer-icon-link" aria-label="Visit LinkedIn profile">
+                    <i data-lucide="linkedin" class="w-6 h-6"></i>
+                </a>
+                <a href="https://github.com/AhmedNasser23" target="_blank" rel="noopener noreferrer" class="footer-icon-link" aria-label="Visit GitHub profile">
+                    <i data-lucide="github" class="w-6 h-6"></i>
+                </a>
+                <a href="mailto:ahmadhemdan280@gmail.com" class="footer-icon-link" aria-label="Email Ahmed">
+                    <i data-lucide="mail" class="w-6 h-6"></i>
+                </a>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        // Initialize Lucide icons
+        lucide.createIcons();
+
+        // Set current year
+        document.getElementById('current-year').textContent = new Date().getFullYear();
+
+        // Smooth scrolling using native browser behavior with CSS scroll-padding-top
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', (e) => {
+                e.preventDefault();
+                const targetId = anchor.getAttribute('href');
+                const targetElement = document.querySelector(targetId);
+                if (targetElement) {
+                    // Just navigate to the hash. CSS scroll-padding-top will handle the offset.
+                    // This leverages the native browser behavior for smooth scrolling to anchors
+                    // while respecting the scroll-padding-top set on the body.
+                    window.location.hash = targetId;
+                }
+            });
+        });
+
+        // Intersection observer for animations
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('fade-in');
+                }
+            });
+        }, { root: null, rootMargin: '0px', threshold: 0.15 });
+
+        document.querySelectorAll('.card').forEach(card => observer.observe(card));
+    </script>
+</body>
+</html>
